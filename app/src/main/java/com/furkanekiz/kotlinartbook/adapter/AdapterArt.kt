@@ -1,26 +1,28 @@
-package com.furkanekiz.kotlinartbook
+package com.furkanekiz.kotlinartbook.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.furkanekiz.kotlinartbook.databinding.RecyclerRowBinding
+import com.furkanekiz.kotlinartbook.ACArt
+import com.furkanekiz.kotlinartbook.Art
+import com.furkanekiz.kotlinartbook.databinding.RowArtBinding
 
-class ArtAdapter(val artList: ArrayList<Art>): RecyclerView.Adapter<ArtAdapter.ArtHolder>() {
+class AdapterArt(private val artList: ArrayList<Art>): RecyclerView.Adapter<AdapterArt.ArtHolder>() {
 
-    class ArtHolder(val binding: RecyclerRowBinding): RecyclerView.ViewHolder(binding.root){
+    class ArtHolder(val binding: RowArtBinding): RecyclerView.ViewHolder(binding.root){
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArtHolder {
-        val binding = RecyclerRowBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = RowArtBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ArtHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ArtHolder, position: Int) {
-        holder.binding.recyclerViewTextView.text = artList.get(position).name
+        holder.binding.tvArtName.text = artList[(position)].name
         holder.itemView.setOnClickListener {
-            val intent = Intent(holder.itemView.context,ArtActivity::class.java)
+            val intent = Intent(holder.itemView.context, ACArt::class.java)
             intent.putExtra("info","old")
             intent.putExtra("id",artList.get(position).id)
             holder.itemView.context.startActivity(intent)

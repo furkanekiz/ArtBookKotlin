@@ -17,21 +17,22 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.furkanekiz.kotlinartbook.databinding.ActivityArtBinding
+import com.furkanekiz.kotlinartbook.databinding.AcArtBinding
 import com.google.android.material.snackbar.Snackbar
 import java.io.ByteArrayOutputStream
 
-class ArtActivity : AppCompatActivity() {
+class ACArt : AppCompatActivity() {
 
-    private lateinit var binding: ActivityArtBinding
+
+    private lateinit var binding: AcArtBinding
     private lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var permissionLauncher: ActivityResultLauncher<String>
     private lateinit var database: SQLiteDatabase
-    var selectedBitmap: Bitmap? = null
+    private var selectedBitmap: Bitmap? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityArtBinding.inflate(layoutInflater)
+        binding = AcArtBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
@@ -42,13 +43,13 @@ class ArtActivity : AppCompatActivity() {
         val intent = intent
         val info = intent.getStringExtra("info")
         if (info.equals("new")){
-            binding.artNameText.setText("")
-            binding.artistNameText.setText("")
-            binding.yearText.setText("")
-            binding.saveButton.visibility = View.VISIBLE
-            binding.imageView.setImageResource(R.drawable.selectimage)
+            binding.etArtName.setText("")
+            binding.etArtistName.setText("")
+            binding.etYear.setText("")
+            binding.btSave.visibility = View.VISIBLE
+            binding.ivSelectImage.setImageResource(R.drawable.bg_selected_image)
         }else{
-            binding.saveButton.visibility = View.INVISIBLE
+            binding.btSave.visibility = View.INVISIBLE
             val selectedId = intent.getIntExtra("id",1)
 
             try {
@@ -60,13 +61,13 @@ class ArtActivity : AppCompatActivity() {
                 val imageIx= cursor.getColumnIndex("image")
 
                 while (cursor.moveToNext()){
-                    binding.artNameText.setText(cursor.getString(artNameIx))
-                    binding.artistNameText.setText(cursor.getString(artistNameIx))
-                    binding.yearText.setText(cursor.getString(yearIx))
+                    binding.etArtName.setText(cursor.getString(artNameIx))
+                    binding.etArtistName.setText(cursor.getString(artistNameIx))
+                    binding.etYear.setText(cursor.getString(yearIx))
 
                     val byteArray = cursor.getBlob(imageIx)
                     val bitmap = BitmapFactory.decodeByteArray(byteArray,0,byteArray.size)
-                    binding.imageView.setImageBitmap(bitmap)
+                    binding.ivSelectImage.setImageBitmap(bitmap)
                 }
                 cursor.close()
             }catch (e: Exception){
@@ -79,9 +80,9 @@ class ArtActivity : AppCompatActivity() {
     }
 
     fun saveButtonClicked(view: View) {
-        val artName = binding.artNameText.text.toString()
-        val artistName = binding.artistNameText.text.toString()
-        val year =binding.yearText.text.toString()
+        val artName = binding.etArtName.text.toString()
+        val artistName = binding.etArtistName.text.toString()
+        val year =binding.etYear.text.toString()
 
         if (selectedBitmap != null){
             val smallBitmap = makeSmallerBitmap(selectedBitmap!!,300)
@@ -107,13 +108,13 @@ class ArtActivity : AppCompatActivity() {
             }
             //finish()
             //or
-            val intent = Intent(this,MainActivity::class.java)
+            val intent = Intent(this,ACMain::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
         }
     }
 
-     fun makeSmallerBitmap(image: Bitmap, maximumSize: Int):Bitmap{
+    private fun makeSmallerBitmap(image: Bitmap, maximumSize: Int):Bitmap{
         //return Bitmap.createScaledBitmap(image,100,100,true)
          var width = image.width
          var height = image.height
@@ -138,11 +139,11 @@ class ArtActivity : AppCompatActivity() {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
                 //rationale
                 Snackbar.make(view, "Permission needed for gallery", Snackbar.LENGTH_INDEFINITE)
-                    .setAction("Give Permission", View.OnClickListener {
+                    .setAction("Give Permission") {
                         //request permission
                         permissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
 
-                    }).show()
+                    }.show()
 
             } else {
                 //request permission
@@ -170,10 +171,10 @@ class ArtActivity : AppCompatActivity() {
                                 if (Build.VERSION.SDK_INT >= 28) {
                                     val source = ImageDecoder.createSource(contentResolver, imageData)
                                     selectedBitmap = ImageDecoder.decodeBitmap(source)
-                                    binding.imageView.setImageBitmap(selectedBitmap)
+                                    binding.ivSelectImage.setImageBitmap(selectedBitmap)
                                 }else{
                                     selectedBitmap = MediaStore.Images.Media.getBitmap(contentResolver,imageData)
-                                    binding.imageView.setImageBitmap(selectedBitmap)
+                                    binding.ivSelectImage.setImageBitmap(selectedBitmap)
                                 }
 
                             } catch (e: Exception) {

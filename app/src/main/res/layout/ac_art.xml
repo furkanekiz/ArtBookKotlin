@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ACArt">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivSelectImage"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginTop="30dp"
+        android:onClick="selectImage"
+        app:srcCompat="@drawable/bg_selected_image"
+        android:contentDescription="@string/select_image"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etArtName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:hint="@string/Art_Name"
+        android:textColorHint="#78909C"
+        android:textSize="@dimen/sp_20" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etArtistName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:hint="@string/Artist_Name"
+        android:textColorHint="#78909C"
+        android:textSize="@dimen/sp_20" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etYear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:hint="@string/Year"
+        android:textSize="@dimen/sp_20"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:onClick="saveButtonClicked"
+        android:text="@string/Save" />
+</LinearLayout>

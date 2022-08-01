@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Furkan/AndroidProjectKotlin/KotlinArtBook/app/src/main/res/layout/ac_art.xml" value="0.25" />
         <entry key="..\:/Furkan/AndroidProjectKotlin/KotlinArtBook/app/src/main/res/layout/activity_art.xml" value="0.23233695652173914" />
         <entry key="..\:/Furkan/AndroidProjectKotlin/KotlinArtBook/app/src/main/res/layout/activity_main.xml" value="0.23233695652173914" />
         <entry key="..\:/Furkan/AndroidProjectKotlin/KotlinArtBook/app/src/main/res/layout/recycler_row.xml" value="0.23233695652173914" />
+        <entry key="..\:/Furkan/AndroidProjectKotlin/KotlinArtBook/app/src/main/res/layout/row_art.xml" value="0.2" />
         <entry key="..\:/Furkan/AndroidProjectKotlin/KotlinArtBook/app/src/main/res/menu/art_menu.xml" value="0.25416666666666665" />
       </map>
     </option>
